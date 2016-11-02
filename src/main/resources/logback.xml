@@ -1,0 +1,60 @@
+<configuration DEBUG="false">
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <!--Error,INFO,INFO,DEBUG,Trace-->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+    <property scope="context" name="COLORIZER_COLORS" value="boldred@,boldmagenta@,boldgreen@,boldblue@,cyan@" />
+    <conversionRule conversionWord="colorize" converterClass="org.tuxdude.logback.extensions.LogColorizer" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %colorize(%-7level) - %-20logger{100} [%-20.20thread{20}] @ %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ZOOKEEPER STUFF -->
+    <logger name="org.apache.zookeeper" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+    <logger name="org.apache.curator" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+
+    <!-- CASSANDRA STUFF -->
+    <logger name="com.datastax.driver" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+    <logger name="com.websudos" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+
+    <!-- AKKA STUFF -->
+    <logger name="akka" level="DEBUG"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+    <logger name="io.netty" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+    <logger name="com.typesafe.sslconfig" level="WARN"
+            additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOGSTASH" />
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+
